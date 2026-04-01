@@ -75,25 +75,49 @@
         .code-block {
             background-color: #05070b;
             color: #00bdbe;
-            padding: 1.25rem;
+            padding: 1rem;
             border-radius: 0.5rem;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             overflow-x: auto;
             border: 1px solid #232933;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 640px) {
+            .code-block {
+                font-size: 0.7rem;
+                padding: 0.75rem;
+            }
+        }
+
+        /* Mobile-friendly table */
+        .policy-table-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 640px) {
+            .policy-table-wrap table {
+                min-width: 480px;
+            }
         }
 
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #05070b; }
         ::-webkit-scrollbar-thumb { background: #232933; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+        /* Hide horizontal scrollbar on nav */
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="min-h-screen">
 
     <!-- Navigation Header -->
     <nav class="bg-surface border-b border-border sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-6">
+        <div class="max-w-6xl mx-auto px-4 md:px-6">
             <div class="hidden md:flex justify-between items-center h-16">
                 <div class="flex items-center gap-3">
                     <a href="https://resolve.quest" class="font-heading text-lg font-bold tracking-tight text-foreground hover:text-cyan transition-colors">resolve<span class="text-cyan">.</span>quest</a>
@@ -121,31 +145,31 @@
     </nav>
 
     <!-- Section Navigation -->
-    <div class="bg-surface/80 backdrop-blur border-b border-border sticky top-16 z-40">
-        <div class="max-w-6xl mx-auto px-6 py-3 overflow-x-auto whitespace-nowrap">
-            <ul class="flex gap-8 text-xs font-semibold text-muted-foreground uppercase tracking-widest">
-                <li><a href="#isdb" class="nav-link hover:text-foreground transition-colors">1. ISDB Layer</a></li>
+    <div class="bg-surface/80 backdrop-blur border-b border-border sticky top-14 md:top-16 z-40">
+        <div class="max-w-6xl mx-auto px-4 md:px-6 py-2.5 md:py-3 overflow-x-auto whitespace-nowrap scrollbar-hide">
+            <ul class="flex gap-4 md:gap-8 text-[0.65rem] md:text-xs font-semibold text-muted-foreground uppercase tracking-wider md:tracking-widest">
+                <li><a href="#isdb" class="nav-link hover:text-foreground transition-colors">1. ISDB</a></li>
                 <li><a href="#appcontrol" class="nav-link hover:text-foreground transition-colors">2. App Control</a></li>
-                <li><a href="#ssl" class="nav-link hover:text-foreground transition-colors">3. SSL Inspection</a></li>
-                <li><a href="#quic" class="nav-link hover:text-foreground transition-colors">4. QUIC Mitigation</a></li>
-                <li><a href="#policy" class="nav-link hover:text-foreground transition-colors">5. Policy Logic</a></li>
+                <li><a href="#ssl" class="nav-link hover:text-foreground transition-colors">3. SSL</a></li>
+                <li><a href="#quic" class="nav-link hover:text-foreground transition-colors">4. QUIC</a></li>
+                <li><a href="#policy" class="nav-link hover:text-foreground transition-colors">5. Policy</a></li>
                 <li><a href="#checklist" class="nav-link hover:text-foreground transition-colors">✓ Checklist</a></li>
             </ul>
         </div>
     </div>
 
     <!-- Hero Section -->
-    <section class="py-16 md:py-24 overflow-hidden relative">
-        <div class="max-w-6xl mx-auto px-6 relative z-10">
-            <h2 class="font-heading text-4xl md:text-5xl font-extrabold mb-6 tracking-tight text-foreground">Blocking Known VPNs <br><span class="text-fortRed">& Evasive Proxies</span></h2>
-            <p class="text-lg text-muted-foreground max-w-2xl mb-8 leading-relaxed">
+    <section class="py-12 md:py-24 overflow-hidden relative">
+        <div class="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
+            <h2 class="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 md:mb-6 tracking-tight text-foreground">Blocking Known VPNs <br class="hidden sm:block"><span class="text-fortRed">& Evasive Proxies</span></h2>
+            <p class="text-base md:text-lg text-muted-foreground max-w-2xl mb-6 md:mb-8 leading-relaxed">
                 Modern VPNs use SSL masking, QUIC encapsulation, and rotating cloud IPs to bypass traditional firewalls. This guide provides a zero-trust architecture approach to identify and block these tunnels in FortiOS 7.6.
             </p>
-            <div class="flex flex-wrap gap-4">
-                <a href="#isdb" class="bg-fortRed hover:bg-fortRedDark transition-colors px-6 py-3 rounded-lg font-semibold flex items-center gap-2 text-white">
+            <div class="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4">
+                <a href="#isdb" class="bg-fortRed hover:bg-fortRedDark transition-colors px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 text-white w-full sm:w-auto">
                     <i class="fas fa-play-circle"></i> Start Implementation
                 </a>
-                <a href="#checklist" class="bg-muted hover:bg-input transition-colors px-6 py-3 rounded-lg font-semibold border border-border text-foreground">
+                <a href="#checklist" class="bg-muted hover:bg-input transition-colors px-6 py-3 rounded-lg font-semibold border border-border text-foreground text-center w-full sm:w-auto">
                     Quick Checklist
                 </a>
             </div>
@@ -153,15 +177,15 @@
         <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#88909c 1px, transparent 1px); background-size: 30px 30px;"></div>
     </section>
 
-    <main class="max-w-6xl mx-auto px-6 pb-16 space-y-24">
+    <main class="max-w-6xl mx-auto px-4 md:px-6 pb-12 md:pb-16 space-y-16 md:space-y-24">
 
         <!-- Layer 1: ISDB -->
-        <section id="isdb" class="scroll-mt-32">
+        <section id="isdb" class="scroll-mt-28 md:scroll-mt-32">
             <div class="flex items-start gap-6">
                 <div class="step-number hidden md:flex">1</div>
                 <div class="flex-1">
-                    <h3 class="font-heading text-3xl font-bold mb-4 tracking-tight text-foreground"><span class="md:hidden text-fortRed mr-2">1.</span>The Internet Service Database (ISDB)</h3>
-                    <p class="text-muted-foreground mb-6 text-lg leading-relaxed">The ISDB is your first line of defense. It blocks traffic based on destination IP ownership. This is high-performance because it triggers at the routing/policy layer before the traffic is even scanned.</p>
+                    <h3 class="font-heading text-2xl md:text-3xl font-bold mb-3 md:mb-4 tracking-tight text-foreground"><span class="md:hidden text-fortRed mr-2">1.</span>The Internet Service Database (ISDB)</h3>
+                    <p class="text-muted-foreground mb-4 md:mb-6 text-base md:text-lg leading-relaxed">The ISDB is your first line of defense. It blocks traffic based on destination IP ownership. This is high-performance because it triggers at the routing/policy layer before the traffic is even scanned.</p>
 
                     <div class="grid md:grid-cols-3 gap-4 mb-8">
                         <div class="p-5 bg-card border border-border rounded-xl hover:border-fortRed/40 transition-colors">
@@ -181,7 +205,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-card p-6 rounded-xl border-l-4 border-fortRed">
+                    <div class="bg-card p-4 md:p-6 rounded-xl border-l-4 border-fortRed">
                         <h4 class="font-heading font-bold mb-3 text-foreground">CLI Shortcut:</h4>
                         <div class="code-block">
                             config firewall policy<br>
@@ -199,14 +223,14 @@
         </section>
 
         <!-- Layer 2: Application Control -->
-        <section id="appcontrol" class="scroll-mt-32">
+        <section id="appcontrol" class="scroll-mt-28 md:scroll-mt-32">
             <div class="flex items-start gap-6">
                 <div class="step-number hidden md:flex">2</div>
                 <div class="flex-1">
-                    <h3 class="font-heading text-3xl font-bold mb-4 tracking-tight text-foreground"><span class="md:hidden text-fortRed mr-2">2.</span>Application Control Signatures</h3>
-                    <p class="text-muted-foreground mb-6 text-lg leading-relaxed">Application Control looks for behavioral patterns. Even if a user hosts a private VPN on their home PC, the FortiGate can recognize the "OpenVPN" or "WireGuard" handshake.</p>
+                    <h3 class="font-heading text-2xl md:text-3xl font-bold mb-3 md:mb-4 tracking-tight text-foreground"><span class="md:hidden text-fortRed mr-2">2.</span>Application Control Signatures</h3>
+                    <p class="text-muted-foreground mb-4 md:mb-6 text-base md:text-lg leading-relaxed">Application Control looks for behavioral patterns. Even if a user hosts a private VPN on their home PC, the FortiGate can recognize the "OpenVPN" or "WireGuard" handshake.</p>
 
-                    <div class="bg-cyan/5 border border-cyan/20 rounded-xl p-6 mb-8 flex gap-4 items-start">
+                    <div class="bg-cyan/5 border border-cyan/20 rounded-xl p-4 md:p-6 mb-6 md:mb-8 flex gap-3 md:gap-4 items-start">
                         <i class="fas fa-info-circle text-cyan text-xl mt-1"></i>
                         <div>
                             <h4 class="font-heading font-bold text-cyan mb-1">Configuration Tip</h4>
@@ -220,7 +244,7 @@
                             <div class="w-3 h-3 rounded-full bg-yellow-500/60"></div>
                             <div class="w-3 h-3 rounded-full bg-green-500/60"></div>
                         </div>
-                        <div class="bg-card p-8">
+                        <div class="bg-card p-4 md:p-8">
                             <p class="text-xs uppercase font-bold text-muted-foreground/60 mb-4 tracking-widest">GUI Navigation: Security Profiles > Application Control</p>
                             <div class="space-y-4">
                                 <div class="flex justify-between items-center p-3 border border-border rounded-lg bg-muted">
@@ -243,12 +267,12 @@
         </section>
 
         <!-- Layer 3: SSL Inspection -->
-        <section id="ssl" class="scroll-mt-32">
+        <section id="ssl" class="scroll-mt-28 md:scroll-mt-32">
             <div class="flex items-start gap-6">
                 <div class="step-number hidden md:flex">3</div>
                 <div class="flex-1">
-                    <h3 class="font-heading text-3xl font-bold mb-4 tracking-tight text-foreground"><span class="md:hidden text-fortRed mr-2">3.</span>Deep SSL Inspection</h3>
-                    <p class="text-muted-foreground mb-6 text-lg leading-relaxed">Without this, your firewall is blind. Modern VPNs hide inside HTTPS (Port 443). Deep Inspection decrypts the session so the Application Control engine can see the tunnel attempt.</p>
+                    <h3 class="font-heading text-2xl md:text-3xl font-bold mb-3 md:mb-4 tracking-tight text-foreground"><span class="md:hidden text-fortRed mr-2">3.</span>Deep SSL Inspection</h3>
+                    <p class="text-muted-foreground mb-4 md:mb-6 text-base md:text-lg leading-relaxed">Without this, your firewall is blind. Modern VPNs hide inside HTTPS (Port 443). Deep Inspection decrypts the session so the Application Control engine can see the tunnel attempt.</p>
 
                     <div class="grid md:grid-cols-2 gap-8 items-center">
                         <div class="space-y-6">
@@ -275,14 +299,14 @@
         </section>
 
         <!-- Layer 4: QUIC Blocking -->
-        <section id="quic" class="scroll-mt-32">
+        <section id="quic" class="scroll-mt-28 md:scroll-mt-32">
             <div class="flex items-start gap-6">
                 <div class="step-number hidden md:flex">4</div>
                 <div class="flex-1">
-                    <h3 class="font-heading text-3xl font-bold mb-4 tracking-tight text-foreground"><span class="md:hidden text-fortRed mr-2">4.</span>Blocking the QUIC Protocol</h3>
-                    <p class="text-muted-foreground mb-6 text-lg leading-relaxed">QUIC (UDP 443) is used by browser-based VPN extensions and Google services. Because it's encrypted and faster than TCP, it is the primary method used to bypass web filters.</p>
+                    <h3 class="font-heading text-2xl md:text-3xl font-bold mb-3 md:mb-4 tracking-tight text-foreground"><span class="md:hidden text-fortRed mr-2">4.</span>Blocking the QUIC Protocol</h3>
+                    <p class="text-muted-foreground mb-4 md:mb-6 text-base md:text-lg leading-relaxed">QUIC (UDP 443) is used by browser-based VPN extensions and Google services. Because it's encrypted and faster than TCP, it is the primary method used to bypass web filters.</p>
 
-                    <div class="bg-fortRed/5 border border-fortRed/20 rounded-xl p-8">
+                    <div class="bg-fortRed/5 border border-fortRed/20 rounded-xl p-5 md:p-8">
                         <h4 class="font-heading font-bold text-red-400 mb-4 flex items-center gap-2 text-lg">
                             <i class="fas fa-ban"></i> Why Block QUIC?
                         </h4>
@@ -303,14 +327,14 @@
         </section>
 
         <!-- Layer 5: Policy Order -->
-        <section id="policy" class="scroll-mt-32">
+        <section id="policy" class="scroll-mt-28 md:scroll-mt-32">
             <div class="flex items-start gap-6">
                 <div class="step-number hidden md:flex">5</div>
                 <div class="flex-1">
-                    <h3 class="font-heading text-3xl font-bold mb-4 tracking-tight text-foreground"><span class="md:hidden text-fortRed mr-2">5.</span>Policy Hierarchy & Logic</h3>
-                    <p class="text-muted-foreground mb-6 text-lg leading-relaxed">Firewall policies are processed from the top down. If your VPN block rule is below your "General Internet" rule, it will never trigger.</p>
+                    <h3 class="font-heading text-2xl md:text-3xl font-bold mb-3 md:mb-4 tracking-tight text-foreground"><span class="md:hidden text-fortRed mr-2">5.</span>Policy Hierarchy & Logic</h3>
+                    <p class="text-muted-foreground mb-4 md:mb-6 text-base md:text-lg leading-relaxed">Firewall policies are processed from the top down. If your VPN block rule is below your "General Internet" rule, it will never trigger.</p>
 
-                    <div class="overflow-hidden border border-border rounded-xl">
+                    <div class="policy-table-wrap border border-border rounded-xl">
                         <table class="w-full text-left">
                             <thead class="bg-muted border-b border-border text-xs font-bold uppercase text-muted-foreground tracking-widest">
                                 <tr>
@@ -341,8 +365,8 @@
         </section>
 
         <!-- Implementation Checklist -->
-        <section id="checklist" class="scroll-mt-32">
-            <div class="bg-card border border-border rounded-xl p-8 md:p-12">
+        <section id="checklist" class="scroll-mt-28 md:scroll-mt-32">
+            <div class="bg-card border border-border rounded-xl p-5 md:p-12">
                 <div class="max-w-3xl mx-auto">
                     <div class="text-center mb-10">
                         <h2 class="font-heading text-3xl font-bold text-foreground tracking-tight">Implementation Checklist</h2>
