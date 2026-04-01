@@ -83,7 +83,8 @@
     <!-- Navigation Header -->
     <nav class="bg-surface border-b border-border sticky top-0 z-30">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
+            <!-- Desktop nav -->
+            <div class="hidden md:flex justify-between items-center h-16">
                 <div class="flex items-center gap-3">
                     <a href="https://resolve.quest" class="text-textMuted hover:text-cyan text-sm transition-colors">resolve.quest</a>
                     <span class="text-border">|</span>
@@ -92,16 +93,26 @@
                     <span class="text-2xl">🛡️</span>
                     <span class="font-bold text-xl tracking-tight text-textPrimary">FortiGate <span class="text-cyan">7.6+</span> Security Advisor</span>
                 </div>
-                <div class="hidden md:flex gap-8">
+                <div class="flex gap-8">
                     <button onclick="switchSection('matrix')" id="nav-matrix" class="nav-link tab-btn-active py-5 text-sm uppercase tracking-wider">The Matrix</button>
                     <button onclick="switchSection('methods')" id="nav-methods" class="nav-link py-5 text-sm uppercase tracking-wider text-textMuted hover:text-cyan transition-colors border-b-3 border-transparent">Implementation</button>
                     <button onclick="switchSection('impact')" id="nav-impact" class="nav-link py-5 text-sm uppercase tracking-wider text-textMuted hover:text-cyan transition-colors border-b-3 border-transparent">Reality Check</button>
                 </div>
-                <!-- Mobile nav -->
-                <div class="md:hidden flex gap-2">
-                    <button onclick="switchSection('matrix')" id="nav-matrix-m" class="nav-link-m px-2 py-1 text-xs uppercase tracking-wider text-cyan font-bold border-b-2 border-cyan">Matrix</button>
-                    <button onclick="switchSection('methods')" id="nav-methods-m" class="nav-link-m px-2 py-1 text-xs uppercase tracking-wider text-textMuted border-b-2 border-transparent">Impl</button>
-                    <button onclick="switchSection('impact')" id="nav-impact-m" class="nav-link-m px-2 py-1 text-xs uppercase tracking-wider text-textMuted border-b-2 border-transparent">Impact</button>
+            </div>
+            <!-- Mobile nav -->
+            <div class="md:hidden">
+                <div class="flex items-center justify-between h-14">
+                    <div class="flex items-center gap-2">
+                        <a href="https://resolve.quest" class="text-textMuted hover:text-cyan text-xs transition-colors">resolve.quest</a>
+                        <span class="text-border text-xs">/</span>
+                        <a href="https://info.resolve.quest" class="text-textMuted hover:text-cyan text-xs transition-colors">info</a>
+                    </div>
+                    <span class="font-bold text-sm tracking-tight text-textPrimary">🛡️ FortiGate <span class="text-cyan">7.6+</span></span>
+                </div>
+                <div class="flex gap-1 -mt-1 pb-2">
+                    <button onclick="switchSection('matrix')" id="nav-matrix-m" class="nav-link-m flex-1 px-2 py-1.5 text-xs uppercase tracking-wider text-center rounded-md text-cyan font-bold bg-cyan/10">Matrix</button>
+                    <button onclick="switchSection('methods')" id="nav-methods-m" class="nav-link-m flex-1 px-2 py-1.5 text-xs uppercase tracking-wider text-center rounded-md text-textMuted">Implementation</button>
+                    <button onclick="switchSection('impact')" id="nav-impact-m" class="nav-link-m flex-1 px-2 py-1.5 text-xs uppercase tracking-wider text-center rounded-md text-textMuted">Impact</button>
                 </div>
             </div>
         </div>
@@ -314,13 +325,13 @@
 
             // Mobile nav
             document.querySelectorAll('.nav-link-m').forEach(l => {
-                l.classList.remove('text-cyan', 'font-bold', 'border-cyan');
-                l.classList.add('text-textMuted', 'border-transparent');
+                l.classList.remove('text-cyan', 'font-bold', 'bg-cyan/10');
+                l.classList.add('text-textMuted');
             });
             const activeMNav = document.getElementById('nav-' + sectionId + '-m');
             if (activeMNav) {
-                activeMNav.classList.remove('text-textMuted', 'border-transparent');
-                activeMNav.classList.add('text-cyan', 'font-bold', 'border-cyan');
+                activeMNav.classList.remove('text-textMuted');
+                activeMNav.classList.add('text-cyan', 'font-bold', 'bg-cyan/10');
             }
         }
 
@@ -383,7 +394,7 @@
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['DNS (NX)', 'DNS (Redirect)', 'Web (SNI)', 'Web (Deep)'],
+                    labels: ['DNS\n(NX)', 'DNS\n(Redirect)', 'Web\n(SNI)', 'Web\n(Deep)'],
                     datasets: [
                         {
                             label: 'Filtering Depth (Perfection)',
@@ -433,7 +444,7 @@
                         },
                         x: {
                             grid: { display: false },
-                            ticks: { color: '#64748b' }
+                            ticks: { color: '#64748b', font: { size: 10 }, maxRotation: 0 }
                         }
                     }
                 }
